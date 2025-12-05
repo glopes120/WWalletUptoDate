@@ -1,0 +1,129 @@
+.savings-goals-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.savings-goals-container h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.goal-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Increased gap for better spacing */
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1em; /* Slightly larger font */
+  align-items: center;
+}
+
+.goal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between amount and delete button */
+}
+
+.goal-name {
+  font-weight: bold;
+  color: var(--n26-black);
+}
+
+.goal-amount {
+  color: var(--n26-dark-gray);
+  font-weight: 500;
+}
+
+.delete-goal-button {
+  background-color: var(--n26-red); /* Red color for delete */
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.75em;
+  transition: background-color 0.2s ease;
+}
+
+.delete-goal-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.progress-bar-container {
+  background-color: var(--n26-light-gray);
+  border-radius: 5px;
+  height: 10px; /* Slightly taller progress bar */
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: var(--n26-green);
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out;
+}
+
+.progress-percentage {
+  align-self: flex-end;
+  font-size: 0.9em; /* Slightly larger font */
+  color: #555;
+  margin-top: 5px;
+}
+
+.contribute-section {
+  display: flex;
+  gap: 5px; /* Reduced gap */
+  margin-top: 10px;
+  align-items: center;
+}
+
+.contribute-section input {
+  flex-grow: 1;
+  padding: 6px; /* Slightly increased padding */
+  border: 1px solid var(--n26-border-color);
+  border-radius: 5px;
+  font-size: 0.9em; /* Slightly increased font size */
+  max-width: 90px; /* Slightly increased max-width */
+}
+
+.contribute-section button {
+  background-color: var(--n26-green);
+  color: white;
+  padding: 6px 10px; /* Reduced padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em; /* Slightly smaller font */
+  transition: background-color 0.2s ease;
+}
+
+.contribute-section button:hover {
+  background-color: #4CAF50;
+}
+
+.error-message {
+  color: var(--n26-red);
+  font-size: 0.9em;
+  margin-top: 10px;
+}

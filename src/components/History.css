@@ -1,0 +1,87 @@
+.history-container {
+    background-color: var(--n26-white);
+    padding: var(--n26-spacing-l);
+    border-radius: var(--n26-border-radius);
+    box-shadow: var(--n26-shadow-s);
+    margin-top: var(--n26-spacing-l); /* Add some top margin for separation */
+}
+
+.history-container h3 {
+    font-family: var(--n26-font-family-secondary); /* Use Poppins for headings */
+    font-size: 1.25rem;
+    margin-bottom: var(--n26-spacing-m);
+    color: var(--n26-black);
+}
+
+.history-tabs {
+    display: flex;
+    margin-bottom: var(--n26-spacing-m);
+    border-bottom: 1px solid var(--n26-border-color);
+}
+
+.history-tabs button {
+    background: none;
+    border: none;
+    padding: var(--n26-spacing-s) var(--n26-spacing-m);
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--n26-dark-gray);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.history-tabs button:hover {
+    color: var(--n26-black);
+}
+
+.history-tabs button.active {
+    color: var(--n26-green);
+    border-bottom-color: var(--n26-green);
+    font-weight: bold;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--n26-spacing-m) 0;
+    border-bottom: 1px solid var(--n26-light-gray);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-item-description {
+    font-weight: 500;
+    color: var(--n26-black); /* Ensure consistent text color */
+}
+
+.history-item-date {
+    font-size: 0.875rem;
+    color: var(--n26-dark-gray);
+}
+
+.history-item-amount {
+    font-weight: 600;
+    color: var(--n26-black); /* Ensure consistent text color */
+}
+
+.income-amount {
+  color: var(--n26-green);
+}
+
+.expense-amount {
+  color: var(--n26-red);
+}

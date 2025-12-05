@@ -1,0 +1,392 @@
+/* NewLoginForm.css */
+
+.login-page-container {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Left - Login Form Section */
+.login-form-section {
+  width: 50%; /* w-1/2 */
+  background-color: #111827; /* bg-gray-900 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem; /* p-8 */
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+}
+
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+  margin-bottom: 3rem; /* mb-12 */
+}
+
+.brand-logo-icon {
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+  background-color: #10b981; /* bg-emerald-500 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-icon span {
+  color: #fff; /* text-white */
+  font-weight: 700; /* font-bold */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.brand-name {
+  color: #fff; /* text-white */
+  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem; /* text-lg */
+}
+
+.welcome-text {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: #fff; /* text-white */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.sub-welcome-text {
+  color: #9ca3af; /* text-gray-400 */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.login-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space-y-4 */
+}
+
+.input-label {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.25rem; /* mb-1 */
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  background-color: #1f2937; /* bg-gray-800 */
+  border: 1px solid #374151; /* border border-gray-700 */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 0.75rem 1rem; /* px-4 py-3 */
+  color: #fff; /* text-white */
+  outline: none; /* focus:outline-none */
+}
+
+.input-field:focus {
+  border-color: #10b981; /* focus:border-emerald-500 */
+}
+
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.forgot-password-link {
+  color: #10b981; /* text-emerald-500 */
+  font-size: 0.875rem; /* text-sm */
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+.remember-me-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+  cursor: pointer;
+}
+
+.checkbox-input {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  border-radius: 0.25rem; /* rounded */
+  border: 1px solid #4b5563; /* border-gray-600 */
+  background-color: #1f2937; /* bg-gray-800 */
+  color: #10b981; /* text-emerald-500 */
+  /* This part is tricky with pure CSS, focus:ring-emerald-500 will not work directly */
+}
+
+.checkbox-label {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #10b981; /* bg-emerald-500 */
+  color: #fff; /* text-white */
+  font-weight: 500; /* font-medium */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: background-color 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* gap-2 */
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #059669; /* hover:bg-emerald-600 */
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+  border: 2px solid #fff; /* border-white */
+  border-top-color: transparent; /* border-t-transparent */
+  border-radius: 9999px; /* rounded-full */
+  animation: spin 1s linear infinite; /* animate-spin */
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.submit-icon {
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+}
+
+.or-divider {
+  text-align: center;
+  color: #6b7280; /* text-gray-500 */
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 1rem; /* mt-4 (adjusted from previous sample for spacing) */
+  margin-bottom: 1rem;
+}
+
+.social-login-buttons {
+  display: flex;
+  flex-direction: column; /* Changed from grid-cols-2 to column as only one social button is left */
+  gap: 0.75rem; /* gap-3 */
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* gap-2 */
+  background-color: #1f2937; /* bg-gray-800 */
+  color: #fff; /* text-white */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: background-color 0.15s ease-in-out;
+  border: none;
+  cursor: pointer;
+}
+
+.social-button:hover {
+  background-color: #374151; /* hover:bg-gray-700 */
+}
+
+.social-icon {
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+}
+
+.no-account-text {
+  text-align: center;
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 1rem; /* mt-4 (adjusted from previous sample for spacing) */
+}
+
+.no-account-text .switch-mode-button {
+  color: #10b981; /* text-emerald-500 */
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  margin-left: 0.25rem;
+}
+
+.no-account-text .switch-mode-button:hover {
+  text-decoration: underline;
+}
+
+.feedback-message {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.feedback-message.success {
+  color: #10b981; /* green */
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.feedback-message.error {
+  color: #ef4444; /* red */
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Right - Features Section */
+.features-section {
+  width: 50%; /* w-1/2 */
+  background-image: linear-gradient(to bottom right, #8b5cf6, #a78bfa); /* bg-gradient-to-br from-violet-600 to-purple-700 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem; /* p-8 */
+  position: relative;
+  overflow: hidden;
+}
+
+.features-background-animation {
+  position: absolute;
+  inset: 0; /* inset-0 */
+  opacity: 0.1; /* opacity-10 */
+}
+
+.animated-dot {
+  position: absolute;
+  width: 0.5rem; /* w-2 */
+  height: 0.5rem; /* h-2 */
+  background-color: #fff; /* bg-white */
+  border-radius: 9999px; /* rounded-full */
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; /* animate-pulse */
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.features-content {
+  position: relative;
+  z-index: 10; /* z-10 */
+  max-width: 28rem; /* max-w-md */
+}
+
+.features-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: #fff; /* text-white */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.features-subtitle {
+  color: #d8b4fe; /* text-purple-200 */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space-y-4 */
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start; /* items-start */
+  gap: 1rem; /* gap-4 */
+}
+
+.feature-item-icon {
+  width: 2.5rem; /* w-10 */
+  height: 2.5rem; /* h-10 */
+  background-color: rgba(255, 255, 255, 0.2); /* bg-white/20 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* text-white */
+  font-weight: 600; /* font-semibold */
+  font-size: 0.875rem; /* text-sm */
+  flex-shrink: 0; /* flex-shrink-0 */
+}
+
+.feature-item-title {
+  color: #fff; /* text-white */
+  font-weight: 600; /* font-semibold */
+}
+
+.feature-item-description {
+  color: #d8b4fe; /* text-purple-200 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.user-count-section {
+  margin-top: 2rem; /* mt-8 */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* gap-3 */
+}
+
+.user-avatars {
+  display: flex;
+  /* -space-x-2 is tricky to replicate perfectly with pure CSS without overriding default margin/padding */
+}
+
+.user-avatar {
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+  border-radius: 9999px; /* rounded-full */
+  border: 2px solid #a78bfa; /* border-2 border-purple-600 */
+  margin-left: -0.5rem; /* Manual adjustment for -space-x-2 */
+}
+
+/* Individual avatar colors (if specific classes were provided) */
+.user-avatar.bg-emerald-400 { background-color: #34d399; }
+.user-avatar.bg-blue-400 { background-color: #60a5fa; }
+.user-avatar.bg-purple-400 { background-color: #c084fc; }
+
+.user-avatar:first-child {
+    margin-left: 0; /* Remove negative margin for the first avatar */
+}
+
+
+.user-count-text {
+  color: #d8b4fe; /* text-purple-200 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.user-count-highlight {
+  color: #fff; /* text-white */
+  font-weight: 600; /* font-semibold */
+}
+
+@media (max-width: 768px) {
+  .login-page-container {
+    flex-direction: column;
+  }
+
+  .login-form-section,
+  .features-section {
+    width: 100%;
+  }
+
+  .features-section {
+    min-height: 400px; /* Ensure features section has some height on small screens */
+  }
+}

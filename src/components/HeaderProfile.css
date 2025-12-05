@@ -1,0 +1,27 @@
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: var(--n26-dark-gray);
+}
+
+.logout-btn {
+  background-color: var(--n26-red);
+  color: var(--n26-white);
+  border: none;
+  border-radius: var(--n26-border-radius);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c53030; /* Darker red on hover */
+}

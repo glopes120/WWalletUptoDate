@@ -1,0 +1,22 @@
+/* AIFinancialInsights.css */
+
+/* Removed styles for .ai-insights-container, .ai-insights-title, .ai-insights-list, .ai-insight-item */
+
+.insight-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* The .card class in index.css already provides background, padding, border-radius, shadow */
+}
+
+.insight-item h2 {
+    font-size: var(--ww-font-size-base); /* Adjust font size for insight title */
+    margin-bottom: var(--ww-spacing-xs);
+    color: var(--ww-text-primary);
+}
+
+.insight-item p {
+    font-size: var(--ww-font-size-sm); /* Adjust font size for insight description */
+    color: var(--ww-text-secondary);
+    margin-bottom: 0; /* Remove bottom margin for paragraph */
+}

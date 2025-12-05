@@ -1,0 +1,630 @@
+/* =================================================================== */
+/* WiseWallet Global Stylesheet - MODERN EDITION (index.css) */
+/* =================================================================== */
+
+/* 1. IMPORTAÇÃO DE FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+
+/* =================================================================== */
+/* 2. WW DESIGN TOKENS (DESIGN SYSTEM MODERNIZADO) */
+/* =================================================================== */
+:root {
+  --primary: #6c5ce7;
+  --primary-dark: #5649d3;
+  --secondary: #a29bfe;
+  --dark-bg: #12121a;
+  --card-bg: #1e1e2a;
+  --text: #ffffff;
+  --text-muted: #b0b0c0;
+  --green: #00c853;
+  --red: #ff5252;
+  --blue: #4dabf7;
+  --orange: #ffa726;
+  --purple: #9c27b0;
+  --gray: #2d2d3a;
+  --border: #2a2a36;
+
+  /* Re-mapping to WW variables for consistency */
+  --ww-primary: var(--primary);
+  --ww-primary-dark: var(--primary-dark);
+  --ww-primary-light: var(--secondary);
+  
+  --ww-gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --ww-gradient-accent: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+  --ww-gradient-success: linear-gradient(135deg, var(--green) 0%, #00a042 100%);
+
+  --ww-accent-negative: var(--red);
+  --ww-accent-positive: var(--green);
+  --ww-accent-warning: var(--orange);
+  --ww-accent-info: var(--blue);
+
+  --ww-bg-primary: var(--dark-bg);
+  --ww-bg-surface: var(--card-bg);
+  --ww-bg-elevated: var(--gray);
+  --ww-text-primary: var(--text);
+  --ww-text-secondary: var(--text-muted);
+  --ww-text-tertiary: #8a8a9e;
+  --ww-border-primary: var(--border);
+  --ww-border-secondary: #4a4a5a;
+
+  /* --- TIPOGRAFIA (Aumentada em ~25%) --- */
+  --ww-font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --ww-font-secondary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  --ww-font-size-xs: 0.9rem;      /* 14.4px */
+  --ww-font-size-sm: 1rem;        /* 16px */
+  --ww-font-size-base: 1.25rem;   /* 20px */
+  --ww-font-size-lg: 1.4rem;      /* 22.4px */
+  --ww-font-size-xl: 1.55rem;     /* 24.8px */
+  --ww-font-size-2xl: 1.875rem;   /* 30px */
+  --ww-font-size-3xl: 2.3rem;     /* 36.8px */
+  --ww-font-size-4xl: 2.8rem;     /* 44.8px */
+  
+  --ww-line-height-tight: 1.25;
+  --ww-line-height-base: 1.5;
+  --ww-line-height-relaxed: 1.75;
+
+  /* --- ESPAÇAMENTOS (Aumentados em 25%) --- */
+  --ww-spacing-xs: 5px;
+  --ww-spacing-s: 10px;
+  --ww-spacing-m: 20px;
+  --ww-spacing-l: 30px;
+  --ww-spacing-xl: 40px;
+  --ww-spacing-2xl: 60px;
+  --ww-spacing-3xl: 80px;
+
+  /* --- BORDAS E SOMBRAS (Aumentadas em ~25%) --- */
+  --ww-border-radius-sm: 8px;
+  --ww-border-radius: 15px;
+  --ww-border-radius-lg: 20px;
+  --ww-border-radius-xl: 25px;
+  --ww-border-radius-full: 9999px;
+  
+  --ww-border-width: 1px;
+  --ww-border-width-thick: 2px;
+  
+  --ww-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.15);
+  --ww-shadow-s: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --ww-shadow-m: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --ww-shadow-l: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --ww-shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.35);
+  
+  --ww-shadow-primary: 0 8px 24px rgba(108, 92, 231, 0.2);
+  --ww-shadow-accent: 0 8px 24px rgba(255, 167, 38, 0.2);
+  --ww-shadow-success: 0 8px 24px rgba(0, 200, 83, 0.2);
+
+  /* --- TRANSIÇÕES --- */
+  --ww-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ww-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ww-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* --- Z-INDEX SCALE --- */
+  --ww-z-dropdown: 1000;
+  --ww-z-sticky: 1020;
+  --ww-z-fixed: 1030;
+  --ww-z-modal-backdrop: 1040;
+  --ww-z-modal: 1050;
+  --ww-z-popover: 1060;
+  --ww-z-tooltip: 1070;
+}
+
+
+/* =================================================================== */
+/* 3. RESET & ESTILOS GLOBAIS MELHORADOS */
+/* =================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* Changed from overflow: hidden to overflow-x: hidden */
+}
+
+body {
+  font-family: var(--ww-font-primary);
+  font-size: var(--ww-font-size-base);
+  line-height: var(--ww-line-height-base);
+  background-color: var(--ww-bg-primary);
+  color: var(--ww-text-secondary);
+  font-weight: 400;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  /* Removed display: flex; flex-direction: column; */
+  position: relative;
+}
+
+
+/* =================================================================== */
+/* 4. ESTILOS DE ELEMENTOS BASE MELHORADOS */
+/* =================================================================== */
+
+/* Links */
+a {
+  color: var(--ww-primary);
+  text-decoration: none;
+  transition: color var(--ww-transition-fast);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--ww-primary-dark);
+}
+
+a:focus {
+  outline: 2px solid var(--ww-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--ww-spacing-m) 0;
+  font-family: var(--ww-font-secondary);
+  font-weight: 700;
+  color: var(--ww-text-primary);
+  line-height: var(--ww-line-height-tight);
+}
+
+h1 {
+  font-size: var(--ww-font-size-4xl);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--ww-font-size-3xl);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--ww-font-size-2xl);
+}
+
+h4 {
+  font-size: var(--ww-font-size-xl);
+}
+
+h5 {
+  font-size: var(--ww-font-size-lg);
+}
+
+h6 {
+  font-size: var(--ww-font-size-base);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--ww-spacing-m);
+}
+
+/* Listas */
+ul, ol {
+  padding-left: var(--ww-spacing-l);
+  margin-bottom: var(--ww-spacing-m);
+}
+
+li {
+  margin-bottom: var(--ww-spacing-xs);
+}
+
+/* Inputs & Forms */
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+button:focus {
+  outline: 2px solid var(--ww-primary);
+  outline-offset: 2px;
+}
+
+/* Imagens */
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* =================================================================== */
+/* 5. CLASSES UTILITÁRIAS & COMPONENTES */
+/* =================================================================== */
+
+/* Transição suave */
+.ww-transition-smooth {
+  transition: background-color var(--ww-transition-base), 
+              color var(--ww-transition-base), 
+              border-color var(--ww-transition-base), 
+              box-shadow var(--ww-transition-base), 
+              transform var(--ww-transition-base);
+}
+
+/* Card moderno (global) */
+.card {
+  background-color: var(--ww-bg-surface);
+  border-radius: var(--ww-border-radius-xl);
+  box-shadow: var(--ww-shadow-m);
+  padding: var(--ww-spacing-l);
+  width: 100%;
+  transition: transform var(--ww-transition-base), 
+              box-shadow var(--ww-transition-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ww-shadow-l);
+}
+
+/* Card com glassmorphism */
+.card-glass {
+  background: var(--ww-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--ww-glass-border);
+  border-radius: var(--ww-border-radius-xl);
+  box-shadow: var(--ww-glass-shadow);
+  padding: var(--ww-spacing-l);
+}
+
+/* Botões modernos */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ww-spacing-s);
+  padding: var(--ww-spacing-s) var(--ww-spacing-l);
+  border-radius: var(--ww-border-radius);
+  font-weight: 600;
+  font-size: var(--ww-font-size-base);
+  transition: all var(--ww-transition-base);
+  cursor: pointer;
+  border: none;
+  font-family: var(--ww-font-primary);
+}
+
+.btn-primary {
+  background: var(--ww-gradient-primary);
+  color: white;
+  box-shadow: var(--ww-shadow-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ww-shadow-xl);
+}
+
+.btn-secondary {
+  background: var(--ww-bg-surface);
+  color: var(--ww-text-primary);
+  border: var(--ww-border-width) solid var(--ww-border-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--ww-bg-elevated);
+  border-color: var(--ww-primary);
+}
+
+.btn-accent {
+  background: var(--ww-gradient-accent);
+  color: white;
+  box-shadow: var(--ww-shadow-accent);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--ww-shadow-xl);
+}
+
+/* Input moderno */
+.input {
+  width: 100%;
+  padding: var(--ww-spacing-m);
+  border: var(--ww-border-width) solid var(--ww-border-primary);
+  border-radius: var(--ww-border-radius);
+  font-size: var(--ww-font-size-base);
+  color: var(--ww-text-primary);
+  background: var(--ww-bg-surface);
+  transition: all var(--ww-transition-base);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ww-primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input::placeholder {
+  color: var(--ww-text-tertiary);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ww-spacing-xs) var(--ww-spacing-m);
+  border-radius: var(--ww-border-radius-full);
+  font-size: var(--ww-font-size-sm);
+  font-weight: 600;
+}
+
+.badge-primary {
+  background: var(--ww-primary-light);
+  color: var(--ww-primary-dark);
+}
+
+.badge-success {
+  background: rgba(56, 239, 125, 0.2);
+  color: #11998e;
+}
+
+.badge-warning {
+  background: rgba(249, 212, 35, 0.2);
+  color: #f83600;
+}
+
+.badge-error {
+  background: rgba(245, 87, 108, 0.2);
+  color: #c41f3b;
+}
+
+/* Container centralizado */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--ww-spacing-l);
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 var(--ww-spacing-l);
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-s {
+  gap: var(--ww-spacing-s);
+}
+
+.gap-m {
+  gap: var(--ww-spacing-m);
+}
+
+.gap-l {
+  gap: var(--ww-spacing-l);
+}
+
+/* Espaçamento utilities */
+.mt-s { margin-top: var(--ww-spacing-s); }
+.mt-m { margin-top: var(--ww-spacing-m); }
+.mt-l { margin-top: var(--ww-spacing-l); }
+.mt-xl { margin-top: var(--ww-spacing-xl); }
+
+.mb-s { margin-bottom: var(--ww-spacing-s); }
+.mb-m { margin-bottom: var(--ww-spacing-m); }
+.mb-l { margin-bottom: var(--ww-spacing-l); }
+.mb-xl { margin-bottom: var(--ww-spacing-xl); }
+
+.p-s { padding: var(--ww-spacing-s); }
+.p-m { padding: var(--ww-spacing-m); }
+.p-l { padding: var(--ww-spacing-l); }
+.p-xl { padding: var(--ww-spacing-xl); }
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--ww-text-primary);
+}
+
+.text-secondary {
+  color: var(--ww-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--ww-text-tertiary);
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+
+/* =================================================================== */
+/* 6. ANIMAÇÕES MELHORADAS */
+/* =================================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Classes de animação */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+
+/* =================================================================== */
+/* 7. SCROLLBAR PERSONALIZADA */
+/* =================================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ww-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ww-border-secondary);
+  border-radius: var(--ww-border-radius-full);
+  border: 2px solid var(--ww-bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ww-text-tertiary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ww-border-secondary) var(--ww-bg-primary);
+}
+
+
+/* =================================================================== */
+/* 8. MEDIA QUERIES */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --ww-font-size-4xl: 1.875rem;
+    --ww-font-size-3xl: 1.5rem;
+    --ww-font-size-2xl: 1.25rem;
+  }
+  
+  .container {
+    padding: 0 var(--ww-spacing-m);
+  }
+  
+  .card {
+    padding: var(--ww-spacing-m);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,59 @@
+.completed-goals-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.completed-goals-container h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.completed-goals-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.completed-goal-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.completed-goal-item:last-child {
+  border-bottom: none;
+}
+
+.goal-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.goal-name {
+  font-weight: bold;
+}
+
+.goal-amount {
+  color: var(--n26-green);
+  font-weight: 500;
+}
+
+.completion-date {
+  font-size: 0.85em;
+  color: #777;
+  align-self: flex-end;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}

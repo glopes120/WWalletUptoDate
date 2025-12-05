@@ -1,0 +1,233 @@
+/* Sidebar.css */
+
+.sidebar {
+  min-height: 100vh;
+  background-color: #1a1f2e; /* From Dashboard.css: .dashboard-layout */
+  width: 250px; /* From Dashboard.css: .side-nav */
+  border-right: 1px solid #2a3342; /* From Dashboard.css: .side-nav */
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #7c3aed; /* Accent color from Dashboard.css */
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon span {
+  color: white;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.logo-text {
+  font-weight: 600;
+  color: white;
+}
+
+.collapse-btn {
+  color: #8b9cb8; /* From Dashboard.css: .nav-btn */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.collapse-btn:hover {
+  color: white;
+}
+
+.user-profile {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #7c3aed; /* Accent color */
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.user-info {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.user-name {
+  color: white;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}
+
+.user-plan {
+  color: #8b9cb8; /* Light text color from Dashboard.css */
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  color: #8b9cb8; /* From Dashboard.css: .nav-btn */
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: #252d3d; /* From Dashboard.css: .side-nav background */
+  color: white;
+}
+
+.nav-item.active {
+  background-color: rgba(124, 58, 237, 0.2);
+  color: #a855f7; /* Accent color */
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.nav-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ai-assistant-card {
+  margin: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 0.75rem;
+}
+
+.ai-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ai-card-icon {
+  color: #a855f7;
+}
+
+.ai-card-title {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ai-card-description {
+  color: #8b9cb8;
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.ai-card-button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ai-card-button:hover {
+  background-color: #a855f7;
+}
+
+.sidebar-footer {
+  padding: 0.75rem;
+  border-top: 1px solid #2a3342;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  color: #8b9cb8;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  background-color: #252d3d;
+  color: white;
+}
+
+.footer-icon {
+  font-size: 1rem;
+}
+
+.footer-label {
+  font-size: 0.875rem;
+}

@@ -1,0 +1,834 @@
+/* ============================================
+   BUDGET MANAGEMENT - ANIMATIONS & STYLES
+   ============================================ */
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In From Bottom */
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progress Bar Fill Animation */
+@keyframes progressBarFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+/* Pulse Warning Animation */
+@keyframes pulseWarning {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Scale Bounce */
+@keyframes scaleBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Shimmer for Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+.budget-container {
+  min-height: 100vh;
+  background-color: #111827;
+  color: white;
+  padding: 1.25rem;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.budget-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.settings-button {
+  padding: 0.625rem;
+  background-color: #1f2937;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.settings-button:hover {
+  background-color: #374151;
+  transform: rotate(45deg);
+}
+
+.add-category-button {
+  padding: 0.625rem 1rem;
+  background-color: #10b981;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.add-category-button:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* ============================================
+   SUMMARY & PIE CHART SECTION
+   ============================================ */
+
+.summary-section {
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.summary-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.summary-label {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.summary-value {
+  font-weight: bold;
+}
+
+.summary-income {
+  color: #34d399;
+  font-size: 1rem;
+}
+
+.summary-expense {
+  color: #f87171;
+  font-size: 1rem;
+}
+
+.summary-remaining {
+  color: white;
+  font-size: 1rem;
+}
+
+.summary-divider {
+  padding-top: 0.5rem;
+  border-top: 1px solid #374151;
+}
+
+/* Budget Progress Bar */
+.budget-progress-container {
+  margin-top: 1rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.progress-label {
+  color: #9ca3af;
+}
+
+.progress-percentage {
+  color: #9ca3af;
+}
+
+.progress-bar-wrapper {
+  height: 0.75rem;
+  background-color: #374151;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+  animation: progressBarFill 1s ease-out;
+}
+
+.progress-bar-safe {
+  background-color: #10b981;
+}
+
+.progress-bar-warning {
+  background-color: #eab308;
+}
+
+.progress-bar-danger {
+  background-color: #ef4444;
+  animation: pulseWarning 2s infinite;
+}
+
+/* ============================================
+   PIE CHART SECTION
+   ============================================ */
+
+.pie-chart-section {
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.pie-chart-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pie-legend-item:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+.pie-legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.125rem;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   BUDGET CATEGORIES
+   ============================================ */
+
+.categories-section {
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  animation: slideInBottom 0.6s ease-out;
+}
+
+.category-item {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #374151;
+  transition: all 0.3s ease;
+}
+
+.category-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.category-item:hover {
+  transform: translateX(4px);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.category-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-name {
+  font-weight: 500;
+  color: white;
+}
+
+.category-amounts {
+  text-align: right;
+}
+
+.category-spent {
+  color: white;
+}
+
+.category-spent-over {
+  color: #f87171;
+}
+
+.category-budget {
+  color: #6b7280;
+}
+
+.category-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.category-progress-bar {
+  flex: 1;
+  height: 0.5rem;
+  background-color: #374151;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.category-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+  animation: progressBarFill 0.8s ease-out;
+}
+
+/* Progress bar colors based on percentage */
+.category-progress-fill-normal {
+  background-color: var(--category-color);
+}
+
+.category-progress-fill-over {
+  background-color: #ef4444;
+}
+
+.category-percentage {
+  font-size: 0.875rem;
+  min-width: 3rem;
+  text-align: right;
+}
+
+.category-percentage-normal {
+  color: #9ca3af;
+}
+
+.category-percentage-over {
+  color: #f87171;
+}
+
+/* Add Category Button */
+.add-category-placeholder {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.625rem;
+  border: 1px dashed #4b5563;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-category-placeholder:hover {
+  color: white;
+  border-color: #6b7280;
+  background-color: #374151;
+}
+
+/* ============================================
+   TRANSACTIONS SECTION
+   ============================================ */
+
+.transactions-section {
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  animation: fadeIn 0.7s ease-out;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: rgba(55, 65, 81, 0.5);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+}
+
+.transaction-item:hover {
+  background-color: rgba(55, 65, 81, 0.8);
+  transform: scale(1.02);
+}
+
+.transaction-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.transaction-icon-income {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.transaction-icon-expense {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.transaction-details {
+  flex: 1;
+  margin-left: 0.75rem;
+}
+
+.transaction-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+}
+
+.transaction-category {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.transaction-amount-wrapper {
+  text-align: right;
+}
+
+.transaction-amount {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.transaction-amount-income {
+  color: #34d399;
+}
+
+.transaction-amount-expense {
+  color: #f87171;
+}
+
+.transaction-date {
+  font-size: 0.625rem;
+  color: #6b7280;
+}
+
+.view-all-button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.625rem;
+  background-color: #374151;
+  color: #d1d5db;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-all-button:hover {
+  background-color: #4b5563;
+  color: white;
+  border-color: #6b7280;
+}
+
+/* ============================================
+   BUDGET INSIGHTS
+   ============================================ */
+
+.insights-section {
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.insight-card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.insight-card:last-child {
+  margin-bottom: 0;
+}
+
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.insight-card-alert {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.insight-card-success {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.insight-card-info {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.insight-icon {
+  font-size: 1.25rem;
+}
+
+.insight-icon-alert {
+  color: #f87171;
+}
+
+.insight-icon-success {
+  color: #34d399;
+}
+
+.insight-icon-info {
+  color: #60a5fa;
+}
+
+.insight-title {
+  font-weight: 600;
+}
+
+.insight-title-alert {
+  color: #fca5a5;
+}
+
+.insight-title-success {
+  color: #6ee7b7;
+}
+
+.insight-title-info {
+  color: #93c5fd;
+}
+
+.insight-description {
+  color: #d1d5db;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.insight-action-button {
+  padding: 0.375rem 0.75rem;
+  background-color: transparent;
+  color: #34d399;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.insight-action-button:hover {
+  text-decoration: underline;
+  transform: translateX(4px);
+}
+
+/* ============================================
+   MODAL (Add Category)
+   ============================================ */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background-color: #1f2937;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: scaleBounce 0.3s ease-out;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-bottom: 0.375rem;
+}
+
+.form-input {
+  width: 100%;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  background-color: #4b5563;
+}
+
+.form-input::placeholder {
+  color: #6b7280;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.modal-button-cancel {
+  flex: 1;
+  padding: 0.75rem;
+  background-color: #374151;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.modal-button-cancel:hover {
+  background-color: #4b5563;
+}
+
+.modal-button-submit {
+  flex: 1;
+  padding: 0.75rem;
+  background-color: #10b981;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.modal-button-submit:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   GRID LAYOUTS
+   ============================================ */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .budget-container {
+    padding: 0.75rem;
+  }
+  
+  .budget-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .header-actions {
+    width: 100%;
+  }
+  
+  .add-category-button {
+    flex: 1;
+  }
+  
+  .pie-chart-content {
+    flex-direction: column;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-bottom {
+  animation: slideInBottom 0.5s ease-out;
+}
+
+/* Loading Skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1f2937 0%,
+    #374151 50%,
+    #1f2937 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
