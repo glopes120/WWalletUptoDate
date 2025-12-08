@@ -24,7 +24,7 @@ const AIFinancialInsights = () => {
         // For this example, we'll simulate fetching insights from a backend.
 
         // Simulate API call to a backend endpoint that uses Gemini to generate insights
-        const response = await fetch('http://localhost:3002/gemini-insights', {
+        const response = await fetch('http://localhost:3002/api/advice', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
