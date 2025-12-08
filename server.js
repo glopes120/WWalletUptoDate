@@ -80,7 +80,7 @@ app.post('/gemini-parse', async (req, res) => {
 });
 
 // Rota 2: Insights Financeiros (Gemini)
-app.post('/gemini-insights', async (req, res) => {
+app.post('/api/advice', async (req, res) => {
     const { userId } = req.body;
 
     if (!userId) return res.status(400).json({ error: 'User ID obrigatório.' });
