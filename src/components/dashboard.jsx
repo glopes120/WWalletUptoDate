@@ -34,10 +34,6 @@ const spendingData = [
   { name: 'Entertainment', value: 6, color: '#f97316' },
   { name: 'Shopping', value: 12, color: '#ec4899' }
 ];
-const insights = [
-  { icon: '🛡️', title: 'Optimize Emergency Fund', impact: 'Medium Impact', color: 'text-yellow-400', desc: 'Your emergency fund is almost complete. Consider moving $5,000 to a high-yield savings account to earn 3.5% APY instead of your current 0.5%.' },
-  { icon: '📊', title: 'Rebalance Investment Portfolio', impact: 'Medium Impact', color: 'text-yellow-400', desc: 'Your tech allocation is 5% higher than your target. Consider rebalancing to reduce risk and align with your long-term strategy.' }
-];
 // --- End of placeholder data ---
 
 function Dashboard({ view, setView }) { 
@@ -154,6 +150,39 @@ function Dashboard({ view, setView }) {
         incomeExpenseData: incomeExpenseChartData,
     };
   }, [accounts, expenses, categories, incomeCategoryId]);
+
+  // --- NOVA FUNÇÃO PARA ENVIAR RELATÓRIO MENSAL ---
+  const handleSendReport = async () => {
+    if (!user) return;
+
+    setNotification({ title: 'A enviar...', message: 'A gerar o seu relatório mensal.', type: 'info' });
+
+    try {
+      // Nota: Certifique-se que o backend está a correr em http://localhost:3002
+      const response = await fetch('http://localhost:3002/send-monthly-report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          userEmail: user.email,
+          userName: user.user_metadata?.full_name || user.email.split('@')[0]
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setNotification({ title: 'Sucesso!', message: 'Relatório enviado para o seu email.', type: 'success' });
+      } else {
+        throw new Error(result.error || 'Falha ao enviar email');
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      setNotification({ title: 'Erro', message: 'Não foi possível enviar o relatório. Verifique se o servidor está online.', type: 'error' });
+    }
+  };
 
   const renderMainContent = () => {
     switch (view.toLowerCase().replace(' ', '')) {
@@ -322,7 +351,13 @@ function Dashboard({ view, setView }) {
         <div className="insights-section">
           <div className="insights-header">
             <h2 className="section-title">AI Financial Insights</h2>
-            <button className="button-primary" style={{padding: '0.375rem 1rem', fontSize: '0.875rem'}}>✨ View All</button>
+            <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+                {/* Botão de Relatório Mensal */}
+                <button onClick={handleSendReport} className="button-secondary" style={{padding: '0.375rem 1rem', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '5px'}}>
+                    📧 Relatório
+                </button>
+                <button className="button-primary" style={{padding: '0.375rem 1rem', fontSize: '0.875rem'}}>✨ View All</button>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
              <AIFinancialInsights />
