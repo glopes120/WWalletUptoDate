@@ -124,7 +124,7 @@ app.post('/api/advice', async (req, res) => {
         res.status(200).json({ insights });
 
     } catch (error) {
-        console.error('[/gemini-insights] Erro:', error);
+        console.error('[//api/advice] Erro:', error);
         res.status(500).json({ error: 'Falha ao gerar insights.' });
     }
 });
