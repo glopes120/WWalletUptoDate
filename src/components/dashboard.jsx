@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { API_URL } from '../config';
 import { supabase } from '../supabaseClient';
 import './Dashboard.css'; // Import the new specific stylesheet
 import History from './History.jsx';
@@ -159,7 +160,7 @@ function Dashboard({ view, setView }) {
 
     try {
       // Nota: Certifique-se que o backend está a correr em http://localhost:3002
-      const response = await fetch('http://localhost:3002/send-monthly-report', {
+      const response = await fetch(`${API_URL}/send-monthly-report`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
