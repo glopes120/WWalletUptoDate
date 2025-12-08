@@ -8,7 +8,7 @@ import { Resend } from 'resend';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 // ------------------------------------------------------------------
 // CONFIGURAÇÕES
