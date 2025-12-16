@@ -1,32 +1,38 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Liga ao Supabase usando as chaves que já estão no Netlify
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL, 
   process.env.VITE_SUPABASE_ANON_KEY
 );
 
 export const handler = async (event, context) => {
-  // Apenas aceita pedidos GET (leitura)
   if (event.httpMethod !== 'GET') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   try {
-    // Busca as últimas 5 despesas
+    // AQUI ESTÁ A MAGIA:
+    // 'categories(name, color)' faz o JOIN automático com a tabela categorias
     const { data, error } = await supabase
       .from('expenses')
-      .select('id, description, amount, date') // Campos simples para a demo
-      .order('date', { ascending: false })
-      .limit(5);
+      .select(`
+        id, 
+        category_id,
+        amount,
+        currency,
+        expense_date,
+        description,
+      `) 
+      .order('expense_date', { ascending: false })
+      .limit(10);
 
     if (error) throw error;
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json', // OBRIGATÓRIO: Define que é JSON
-        'Access-Control-Allow-Origin': '*'  // Permite acesso de qualquer lado
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(data),
     };
