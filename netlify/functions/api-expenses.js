@@ -15,14 +15,7 @@ export const handler = async (event, context) => {
     // 'categories(name, color)' faz o JOIN automático com a tabela categorias
     const { data, error } = await supabase
       .from('expenses')
-      .select(`
-        id, 
-        category_id,
-        amount,
-        currency,
-        expense_date,
-        description,
-      `) 
+      .select('id, category_id, amount, currency, expense_date, description')
       .order('expense_date', { ascending: false })
       .limit(10);
 
