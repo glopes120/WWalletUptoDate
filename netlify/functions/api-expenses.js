@@ -1,30 +1,26 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Inicialização do cliente Supabase
-// Mantemos fora do handler para reutilizar a conexão em chamadas subsequentes (performance)
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL, 
+  process.env.VITE_SUPABASE_URL,
   process.env.VITE_SUPABASE_ANON_KEY
 );
 
 export const handler = async (event, context) => {
-  // 1. Headers para permitir CORS (acesso de qualquer origem durante desenvolvimento)
   const headers = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*' 
+    'Access-Control-Allow-Origin': '*'
   };
 
   try {
-    // 2. Extração segura dos parâmetros da URL
     const params = event.queryStringParameters || {};
-    
-    // IMPORTANTE: Conversão para Inteiro. 
-    // O Postgres é estrito: se a coluna é int4, não devemos enviar strings.
     const expenseId = params.id ? parseInt(params.id) : null;
     const categoryId = params.category ? parseInt(params.category) : null;
 
-    // 3. Construção da Query Base na tabela 'expenses'
-    // Fazemos o SELECT dos dados da despesa E os dados da categoria relacionada
+    // --- CORREÇÃO AQUI ---
+    // Alterámos o select para ser EXPLÍCITO na relação.
+    // Sintaxe: "nome_tabela_destino!nome_coluna_local ( colunas )"
+    // Isto força o Supabase a usar a coluna 'category_id' para fazer o JOIN.
+    
     let query = supabase
       .from('expenses')
       .select(`
@@ -32,36 +28,32 @@ export const handler = async (event, context) => {
         description, 
         amount, 
         expense_date,
-        categories ( id, name, color )
+        categories:category_id ( id, name, color ) 
       `);
+      
+      // NOTA: Se a tua coluna na tabela 'expenses' se chamar apenas 'category',
+      // muda a linha acima para:  categories:category ( id, name, color )
 
-    // 4. Aplicação dos Filtros
+    // Lógica de Filtros (Mantida igual, apenas garantindo o nome da coluna correto)
     if (expenseId && !isNaN(expenseId)) {
-      // Cenário A: Filtrar por ID de despesa (retorna apenas 1 objeto)
       query = query.eq('id', expenseId).single();
-
     } else if (categoryId && !isNaN(categoryId)) {
-      // Cenário B: Filtrar por Categoria
-      // AQUI ESTÁ O PONTO CRÍTICO:
-      // O primeiro argumento de .eq() deve ser o nome da coluna NA TABELA EXPENSES.
-      // Baseado na imagem 1, é muito provável que seja 'category_id'.
-      // Se der erro, tenta mudar 'category_id' para 'category'.
+      // Aqui também usamos o nome correto da coluna
       query = query
         .eq('category_id', categoryId) 
         .order('expense_date', { ascending: false });
-
     } else {
-      // Cenário C: Listar todas as despesas (limitado às últimas 20)
       query = query
         .order('expense_date', { ascending: false })
         .limit(20);
     }
 
-    // 5. Execução da Query
     const { data, error } = await query;
 
-    // Se houver erro no Supabase (ex: nome da coluna errado), lançamos a exceção
-    if (error) throw error;
+    if (error) {
+        console.error("Erro Supabase:", error);
+        throw error;
+    }
 
     return {
       statusCode: 200,
@@ -70,16 +62,10 @@ export const handler = async (event, context) => {
     };
 
   } catch (error) {
-    // Log detalhado para o teu painel do servidor (Netlify/Vercel)
-    console.error("Erro no Webservice:", error);
-
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        error: error.message,
-        hint: "Verifique se o nome da coluna no código ('category_id') bate certo com a tabela 'expenses'."
-      }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
