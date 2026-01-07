@@ -4,30 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiseWallet API - Documentação</title>
-    <meta name="description" content="Portal de documentação e teste para a API WiseWallet">
     
     <style>
         :root {
-            /* Definição de Cores - Tema Escuro Profissional */
-            --bg-color: #0f172a;       /* Slate 900 */
-            --card-bg: #1e293b;        /* Slate 800 */
-            --text-main: #f8fafc;      /* Slate 50 */
-            --text-muted: #94a3b8;     /* Slate 400 */
-            --primary: #3b82f6;        /* Azul */
-            --primary-hover: #2563eb;  /* Azul Escuro */
-            --success: #22c55e;        /* Verde */
-            --error: #ef4444;          /* Vermelho */
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --success: #22c55e;
+            --error: #ef4444;
             --code-font: 'Courier New', Courier, monospace;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
@@ -36,44 +30,18 @@
             min-height: 100vh;
         }
 
-        /* Layout */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            width: 100%;
-            flex: 1;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; width: 100%; flex: 1; }
 
-        /* Cabeçalho */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--card-bg);
-            padding-bottom: 2rem;
-        }
+        header { text-align: center; margin-bottom: 3rem; border-bottom: 1px solid var(--card-bg); padding-bottom: 2rem; }
+        h1 { font-size: 2.5rem; background: linear-gradient(to right, var(--primary), #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: var(--text-muted); }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, var(--primary), #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-        }
-
-        p.subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Cartão do Endpoint */
         .endpoint-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             border: 1px solid #334155;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         .label {
@@ -81,97 +49,78 @@
             font-size: 0.75rem;
             letter-spacing: 0.1em;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             display: block;
             font-weight: 700;
         }
 
-        /* Área do URL */
-        .url-box {
-            display: flex;
+        /* Área do URL e Input */
+        .controls-area {
             background-color: #020617;
             border: 1px solid #334155;
             border-radius: 8px;
-            overflow: hidden;
+            padding: 1rem;
             margin-bottom: 1.5rem;
         }
 
+        .url-display {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-family: var(--code-font);
+            color: var(--primary);
+            word-break: break-all;
+        }
+        
         .method {
             background-color: var(--primary);
             color: white;
-            padding: 0.75rem 1.2rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 0.8rem;
             font-weight: bold;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 80px;
         }
 
-        .url-text {
+        /* Estilo do Input de Categoria */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        input[type="text"] {
+            background-color: #1e293b;
+            border: 1px solid #475569;
+            color: white;
+            padding: 0.6rem;
+            border-radius: 6px;
             flex-grow: 1;
-            padding: 0.75rem 1rem;
-            font-family: var(--code-font);
-            color: var(--text-main);
-            overflow-x: auto;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
-        /* Botões */
         .btn {
             cursor: pointer;
             border: none;
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 6px;
             font-weight: 600;
             transition: all 0.2s;
             font-size: 0.95rem;
         }
 
-        .btn-copy {
-            background-color: transparent;
-            color: var(--primary);
-            border-left: 1px solid #334155;
-            border-radius: 0;
-            padding: 0 1.5rem;
-        }
-
-        .btn-copy:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-        }
-
         .btn-test {
             background-color: var(--primary);
             color: white;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
         }
-
-        .btn-test:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-test:disabled {
-            background-color: var(--text-muted);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Consola de Resultados */
-        .console-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
+        .btn-test:hover { background-color: var(--primary-hover); }
+        .btn-test:disabled { background-color: var(--text-muted); cursor: not-allowed; }
 
         .console-output {
             background-color: #000;
@@ -186,71 +135,40 @@
             white-space: pre-wrap;
             border: 1px solid #334155;
             display: none;
+            margin-top: 1rem;
         }
 
-        /* Spinner de Loading */
-        .spinner {
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top: 3px solid #fff;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--card-bg);
-        }
-
-        @media (max-width: 600px) {
-            .url-box { flex-direction: column; }
-            .method { width: 100%; }
-            .btn-copy { width: 100%; border-left: none; border-top: 1px solid #334155; }
-        }
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--card-bg); margin-top: 2rem;}
     </style>
 </head>
 <body>
-
     <div class="container">
         <header>
             <h1>WiseWallet API</h1>
-            <p class="subtitle">Documentação do Webservice de Despesas</p>
+            <p class="subtitle">Teste de Integração e Filtros</p>
         </header>
 
         <main>
             <section class="endpoint-card">
-                <span class="label">GET Endpoint</span>
-                <p style="margin-bottom: 1rem; color: var(--text-muted);">
-                    Recupera a lista de despesas em formato JSON.
-                </p>
+                <span class="label">Configurar Pedido (GET)</span>
+                
+                <div class="controls-area">
+                    <div class="url-display">
+                        <span class="method">GET</span>
+                        <span id="urlPreview">...</span>
+                    </div>
 
-                <div class="url-box">
-                    <div class="method">GET</div>
-                    <div class="url-text" id="apiUrl">https://wwupt.netlify.app/.netlify/functions/api-expenses</div>
-                    <button class="btn btn-copy" id="copyBtn" title="Copiar URL">
-                        COPIAR
-                    </button>
+                    <div class="input-group">
+                        <input type="text" id="categoryInput" placeholder="Filtrar por Categoria (ex: Alimentação)">
+                    </div>
                 </div>
 
-                <button class="btn btn-test" id="testBtn">
-                    <div class="spinner" id="loadingSpinner"></div>
-                    <span id="btnText">Testar Endpoint Agora</span>
-                </button>
+                <button class="btn btn-test" id="testBtn">Testar Endpoint</button>
 
                 <div id="consoleArea" style="display: none;">
-                    <div class="console-header">
-                        <span class="label" style="margin:0">Resultado (JSON)</span>
-                        <span class="label" id="statusCode" style="margin:0; color: var(--success)"></span>
+                    <div style="margin-top: 1.5rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                        <span class="label" style="margin:0">Resposta JSON</span>
+                        <span class="label" id="statusCode" style="color: var(--success); margin:0"></span>
                     </div>
                     <div class="console-output" id="outputConsole"></div>
                 </div>
@@ -259,88 +177,77 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 WiseWallet Project</p>
+        <p>&copy; 2026 WiseWallet API Docs</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const apiUrlElement = document.getElementById('apiUrl');
-            const copyBtn = document.getElementById('copyBtn');
-            const testBtn = document.getElementById('testBtn');
-            const btnText = document.getElementById('btnText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const consoleArea = document.getElementById('consoleArea');
-            const outputConsole = document.getElementById('outputConsole');
-            const statusCodeSpan = document.getElementById('statusCode');
+        const BASE_URL = "https://wwupt.netlify.app/.netlify/functions/api-expenses";
+        
+        // Elementos
+        const categoryInput = document.getElementById('categoryInput');
+        const urlPreview = document.getElementById('urlPreview');
+        const testBtn = document.getElementById('testBtn');
+        const outputConsole = document.getElementById('outputConsole');
+        const statusCodeSpan = document.getElementById('statusCode');
+        const consoleArea = document.getElementById('consoleArea');
 
-            const url = apiUrlElement.innerText.trim();
+        // Função para atualizar o URL visualmente enquanto escreve
+        function updateUrlPreview() {
+            const cat = categoryInput.value.trim();
+            if (cat) {
+                urlPreview.innerText = `${BASE_URL}?category=${encodeURIComponent(cat)}`;
+            } else {
+                urlPreview.innerText = BASE_URL;
+            }
+        }
 
-            // 1. Copiar URL
-            copyBtn.addEventListener('click', () => {
-                if(navigator.clipboard) {
-                    navigator.clipboard.writeText(url).then(() => {
-                        const original = copyBtn.innerText;
-                        copyBtn.innerText = "COPIADO!";
-                        copyBtn.style.color = "var(--success)";
-                        setTimeout(() => { 
-                            copyBtn.innerText = original; 
-                            copyBtn.style.color = "var(--primary)";
-                        }, 2000);
-                    });
-                } else {
-                    alert("Copie manualmente: " + url);
-                }
-            });
+        // Evento: Atualizar URL ao escrever
+        categoryInput.addEventListener('input', updateUrlPreview);
+        // Inicializar URL
+        updateUrlPreview();
 
-            // 2. Testar API (Fetch)
-            testBtn.addEventListener('click', async () => {
-                // UI Loading
-                testBtn.disabled = true;
-                btnText.innerText = "A carregar...";
-                loadingSpinner.style.display = "block";
-                consoleArea.style.display = 'none';
-                outputConsole.innerText = "";
+        // Evento: Clicar no Botão Testar
+        testBtn.addEventListener('click', async () => {
+            // UI Loading
+            testBtn.disabled = true;
+            testBtn.innerText = "A carregar...";
+            consoleArea.style.display = 'none';
+            outputConsole.innerText = "";
 
-                try {
-                    const start = performance.now();
-                    const response = await fetch(url);
-                    const duration = (performance.now() - start).toFixed(0);
+            // Construir URL final
+            const cat = categoryInput.value.trim();
+            let fetchUrl = BASE_URL;
+            if (cat) {
+                fetchUrl += `?category=${encodeURIComponent(cat)}`;
+            }
 
-                    statusCodeSpan.innerText = `Status: ${response.status} (${duration}ms)`;
-                    
-                    if(response.ok) {
-                        statusCodeSpan.style.color = "var(--success)";
-                        outputConsole.style.color = "var(--success)";
-                    } else {
-                        statusCodeSpan.style.color = "var(--error)";
-                        outputConsole.style.color = "var(--error)";
-                    }
+            try {
+                const start = performance.now();
+                const response = await fetch(fetchUrl);
+                const duration = (performance.now() - start).toFixed(0);
 
-                    // Tenta ler como JSON, fallback para Texto
-                    try {
-                        const data = await response.json();
-                        outputConsole.innerText = JSON.stringify(data, null, 2);
-                    } catch (e) {
-                        const text = await response.text();
-                        outputConsole.innerText = text || "Sem conteúdo.";
-                    }
+                // Status
+                statusCodeSpan.innerText = `${response.status} ${response.statusText} (${duration}ms)`;
+                statusCodeSpan.style.color = response.ok ? "var(--success)" : "var(--error)";
 
-                    consoleArea.style.display = 'block';
-                    outputConsole.style.display = 'block';
+                // JSON
+                const data = await response.json();
+                outputConsole.innerText = JSON.stringify(data, null, 2);
+                outputConsole.style.color = response.ok ? "var(--success)" : "var(--error)";
 
-                } catch (error) {
-                    consoleArea.style.display = 'block';
-                    outputConsole.style.display = 'block';
-                    statusCodeSpan.innerText = "Erro de Rede";
-                    statusCodeSpan.style.color = "var(--error)";
-                    outputConsole.style.color = "var(--error)";
-                    outputConsole.innerText = "Erro ao conectar:\n" + error.message;
-                } finally {
-                    testBtn.disabled = false;
-                    btnText.innerText = "Testar Endpoint Agora";
-                    loadingSpinner.style.display = "none";
-                }
-            });
+                consoleArea.style.display = 'block';
+                outputConsole.style.display = 'block';
+
+            } catch (error) {
+                consoleArea.style.display = 'block';
+                outputConsole.style.display = 'block';
+                statusCodeSpan.innerText = "ERRO DE REDE";
+                statusCodeSpan.style.color = "var(--error)";
+                outputConsole.innerText = error.message;
+            } finally {
+                testBtn.disabled = false;
+                testBtn.innerText = "Testar Endpoint";
+            }
         });
     </script>
 </body>
