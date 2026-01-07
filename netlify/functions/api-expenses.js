@@ -1,71 +1,62 @@
-import { createClient } from '@supabase/supabase-js';
+/* Ficheiro: netlify/functions/api-expenses.js
+  Descrição: Endpoint para listar despesas com suporte a filtro de categoria.
+*/
 
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL,
-  process.env.VITE_SUPABASE_ANON_KEY
-);
+const { createClient } = require('@supabase/supabase-js');
 
-export const handler = async (event, context) => {
+// Configuração do Supabase (lê as variáveis de ambiente do Netlify)
+const supabaseUrl = process.env.VITE_SUPABASE_URL; 
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+exports.handler = async (event, context) => {
+  // 1. Headers para permitir acesso de qualquer lugar (CORS)
   const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS'
   };
 
-  try {
-    const params = event.queryStringParameters || {};
-    const expenseId = params.id ? parseInt(params.id) : null;
-    const categoryId = params.category ? parseInt(params.category) : null;
+  // Se for um pedido OPTIONS (pre-flight do browser), responde logo OK
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
+  }
 
-    // --- CORREÇÃO AQUI ---
-    // Alterámos o select para ser EXPLÍCITO na relação.
-    // Sintaxe: "nome_tabela_destino!nome_coluna_local ( colunas )"
-    // Isto força o Supabase a usar a coluna 'category_id' para fazer o JOIN.
-    
+  try {
+    // 2. Ler parâmetros do URL (ex: ?category=Alimentação)
+    const { category } = event.queryStringParameters || {};
+
+    // 3. Iniciar a query base
     let query = supabase
       .from('expenses')
-      .select(`
-        id, 
-        description, 
-        amount, 
-        expense_date,
-        categories:category_id ( id, name, color ) 
-      `);
-      
-      // NOTA: Se a tua coluna na tabela 'expenses' se chamar apenas 'category',
-      // muda a linha acima para:  categories:category ( id, name, color )
+      .select('*')
+      .order('date', { ascending: false }); // Ordenar por data (mais recente primeiro)
 
-    // Lógica de Filtros (Mantida igual, apenas garantindo o nome da coluna correto)
-    if (expenseId && !isNaN(expenseId)) {
-      query = query.eq('id', expenseId).single();
-    } else if (categoryId && !isNaN(categoryId)) {
-      // Aqui também usamos o nome correto da coluna
-      query = query
-        .eq('category_id', categoryId) 
-        .order('expense_date', { ascending: false });
-    } else {
-      query = query
-        .order('expense_date', { ascending: false })
-        .limit(20);
+    // 4. Se houver categoria, aplicar o filtro
+    if (category) {
+      // Usa ilike para ignorar maiúsculas/minúsculas (Ex: 'food' encontra 'Food')
+      // Os '%' permitem encontrar texto parcial se desejar
+      query = query.ilike('category', `%${category}%`);
     }
 
+    // Executar a query
     const { data, error } = await query;
 
-    if (error) {
-        console.error("Erro Supabase:", error);
-        throw error;
-    }
+    if (error) throw error;
 
+    // 5. Retornar os dados
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     };
 
   } catch (error) {
+    console.error('Erro na API:', error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: 'Erro ao buscar despesas', details: error.message })
     };
   }
 };
