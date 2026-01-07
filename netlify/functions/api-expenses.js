@@ -1,64 +1,99 @@
 /* Ficheiro: netlify/functions/api-expenses.js
-  Correção: Uso de ES Modules (import/export) e tratamento de erros melhorado.
+  Correção: 
+  1. Sintaxe do SELECT corrigida para o padrão Supabase (*, categories(id, name)).
+  2. Removido o 'parseInt' da categoria para permitir busca por texto (ex: "Casa").
+  3. Lógica de filtro adaptada para procurar dentro da tabela relacionada.
 */
 
 import { createClient } from '@supabase/supabase-js';
 
-// Configuração do Supabase
-const supabaseUrl = process.env.VITE_SUPABASE_URL; 
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL,
+  process.env.VITE_SUPABASE_ANON_KEY
+);
 
 export const handler = async (event, context) => {
-  // 1. Headers para CORS (Permitir acesso do Frontend)
   const headers = {
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET, OPTIONS'
   };
 
+  // Pre-flight para CORS
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
 
   try {
-    const { category } = event.queryStringParameters || {};
+    const params = event.queryStringParameters || {};
+    
+    // Se vier 'id', é número. Se vier 'category', tratamos como texto para busca.
+    const expenseId = params.id ? parseInt(params.id) : null;
+    const categorySearch = params.category || null;
 
-    /* IMPORTANTE: Ajuste do SELECT
-       Se a sua tabela de despesas tiver uma coluna 'category' com texto, use select('*').
-       Se usar uma chave estrangeira (category_id), use select('*, categories(name)') para trazer o nome.
-       Por defeito, mantivemos select('*') que funciona na maioria dos casos simples.
-    */
+    // 1. CONSTRUÇÃO DA QUERY BASE
+    // Usamos select('*') para pegar tudo de expenses (incluindo category_id)
+    // E 'categories(id, name)' para pegar o nome da categoria relacionada.
     let query = supabase
       .from('expenses')
-      .select('*') 
-      .order('date', { ascending: false });
+      .select(`
+        *,
+        categories (
+          id,
+          name
+        )
+      `)
+      .order('expense_date', { ascending: false });
 
-    // Filtro inteligente (Case Insensitive)
-    // Ex: "ali" encontra "Alimentação", "ALIMENTAÇÃO", etc.
-    if (category) {
-      query = query.ilike('category', `%${category}%`);
+    // 2. APLICAÇÃO DE FILTROS
+    if (expenseId && !isNaN(expenseId)) {
+      // Filtrar por ID específico da despesa
+      query = query.eq('id', expenseId).single();
+    
+    } else if (categorySearch) {
+      // Filtrar por NOME da categoria (usando a relação)
+      // O '!inner' força o sistema a trazer apenas despesas que tenham essa categoria
+      // O 'ilike' faz a busca ignorando maiúsculas/minúsculas
+      query = supabase
+        .from('expenses')
+        .select(`
+          *,
+          categories!inner (
+            id, 
+            name
+          )
+        `)
+        .ilike('categories.name', `%${categorySearch}%`)
+        .order('expense_date', { ascending: false });
+    } else {
+      // Sem filtros: limitar para não sobrecarregar
+      query = query.limit(50);
     }
 
+    // 3. EXECUÇÃO
     const { data, error } = await query;
 
-    if (error) throw error;
+    if (error) {
+        console.error("Erro Supabase:", error);
+        throw error;
+    }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     };
 
   } catch (error) {
-    console.error('Erro na API:', error);
+    console.error("Erro Crítico:", error);
     return {
-      statusCode: 500, // Erro de Servidor
+      statusCode: 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Erro ao buscar dados.', 
+        error: 'Erro ao processar pedido.', 
         details: error.message 
-      })
+      }),
     };
   }
 };
