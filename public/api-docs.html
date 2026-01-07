@@ -8,15 +8,15 @@
     
     <style>
         :root {
-            /* Paleta de Cores Dark Mode Moderno */
-            --bg-color: #0f172a;       /* Fundo principal (Slate 900) */
-            --card-bg: #1e293b;        /* Fundo dos painéis (Slate 800) */
-            --text-main: #f8fafc;      /* Texto principal (Branco sujo) */
-            --text-muted: #94a3b8;     /* Texto secundário (Cinzento azulado) */
-            --primary: #3b82f6;        /* Azul destaque */
-            --primary-hover: #2563eb;  /* Azul mais escuro para interação */
-            --success: #22c55e;        /* Verde para sucesso */
-            --error: #ef4444;          /* Vermelho para erros */
+            /* Definição de Cores - Tema Escuro Profissional */
+            --bg-color: #0f172a;       /* Slate 900 */
+            --card-bg: #1e293b;        /* Slate 800 */
+            --text-main: #f8fafc;      /* Slate 50 */
+            --text-muted: #94a3b8;     /* Slate 400 */
+            --primary: #3b82f6;        /* Azul */
+            --primary-hover: #2563eb;  /* Azul Escuro */
+            --success: #22c55e;        /* Verde */
+            --error: #ef4444;          /* Vermelho */
             --code-font: 'Courier New', Courier, monospace;
         }
 
@@ -33,10 +33,10 @@
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Garante que ocupa a altura total do ecrã */
+            min-height: 100vh;
         }
 
-        /* Contentor centralizado */
+        /* Layout */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -45,7 +45,7 @@
             flex: 1;
         }
 
-        /* Cabeçalho da página */
+        /* Cabeçalho */
         header {
             text-align: center;
             margin-bottom: 3rem;
@@ -56,7 +56,6 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            /* Gradiente de texto para dar um toque 'premium' */
             background: linear-gradient(to right, var(--primary), #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; 
@@ -67,13 +66,13 @@
             font-size: 1.1rem;
         }
 
-        /* Cartões de conteúdo */
+        /* Cartão do Endpoint */
         .endpoint-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             border: 1px solid #334155;
         }
 
@@ -87,13 +86,13 @@
             font-weight: 700;
         }
 
-        /* Componente Visual do URL */
+        /* Área do URL */
         .url-box {
             display: flex;
-            background-color: #020617; /* Fundo quase preto */
+            background-color: #020617;
             border: 1px solid #334155;
             border-radius: 8px;
-            overflow: hidden; /* Para o botão não sair das bordas */
+            overflow: hidden;
             margin-bottom: 1.5rem;
         }
 
@@ -114,7 +113,7 @@
             padding: 0.75rem 1rem;
             font-family: var(--code-font);
             color: var(--text-main);
-            overflow-x: auto; /* Scroll horizontal se o URL for longo */
+            overflow-x: auto;
             white-space: nowrap;
             display: flex;
             align-items: center;
@@ -156,11 +155,7 @@
 
         .btn-test:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-1px); /* Ligeiro efeito de elevação */
-        }
-
-        .btn-test:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-test:disabled {
@@ -169,7 +164,7 @@
             transform: none;
         }
 
-        /* Consola de Saída (Output) */
+        /* Consola de Resultados */
         .console-header {
             display: flex;
             justify-content: space-between;
@@ -188,12 +183,12 @@
             min-height: 100px;
             max-height: 500px;
             overflow-y: auto;
-            white-space: pre-wrap; /* Mantém a formatação do JSON */
+            white-space: pre-wrap;
             border: 1px solid #334155;
-            display: none; /* Escondido inicialmente */
+            display: none;
         }
 
-        /* Estado de Loading */
+        /* Spinner de Loading */
         .spinner {
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
@@ -201,7 +196,7 @@
             width: 20px;
             height: 20px;
             animation: spin 1s linear infinite;
-            display: none; /* Escondido por defeito */
+            display: none;
         }
 
         @keyframes spin {
@@ -217,20 +212,10 @@
             border-top: 1px solid var(--card-bg);
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .url-box {
-                flex-direction: column;
-            }
-            .method {
-                width: 100%;
-            }
-            .btn-copy {
-                width: 100%;
-                border-left: none;
-                border-top: 1px solid #334155;
-                padding: 1rem;
-            }
+            .url-box { flex-direction: column; }
+            .method { width: 100%; }
+            .btn-copy { width: 100%; border-left: none; border-top: 1px solid #334155; }
         }
     </style>
 </head>
@@ -239,20 +224,20 @@
     <div class="container">
         <header>
             <h1>WiseWallet API</h1>
-            <p class="subtitle">Microserviço de gestão financeira e despesas.</p>
+            <p class="subtitle">Documentação do Webservice de Despesas</p>
         </header>
 
         <main>
             <section class="endpoint-card">
                 <span class="label">GET Endpoint</span>
                 <p style="margin-bottom: 1rem; color: var(--text-muted);">
-                    Recupera a lista completa de despesas registadas na base de dados.
+                    Recupera a lista de despesas em formato JSON.
                 </p>
 
                 <div class="url-box">
                     <div class="method">GET</div>
                     <div class="url-text" id="apiUrl">https://wwupt.netlify.app/.netlify/functions/api-expenses</div>
-                    <button class="btn btn-copy" id="copyBtn" title="Copiar para a área de transferência">
+                    <button class="btn btn-copy" id="copyBtn" title="Copiar URL">
                         COPIAR
                     </button>
                 </div>
@@ -264,7 +249,7 @@
 
                 <div id="consoleArea" style="display: none;">
                     <div class="console-header">
-                        <span class="label" style="margin:0">Resposta do Servidor (JSON)</span>
+                        <span class="label" style="margin:0">Resultado (JSON)</span>
                         <span class="label" id="statusCode" style="margin:0; color: var(--success)"></span>
                     </div>
                     <div class="console-output" id="outputConsole"></div>
@@ -274,12 +259,11 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 WiseWallet Project. Documentation Page.</p>
+        <p>&copy; 2026 WiseWallet Project</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Elementos do DOM
             const apiUrlElement = document.getElementById('apiUrl');
             const copyBtn = document.getElementById('copyBtn');
             const testBtn = document.getElementById('testBtn');
@@ -289,53 +273,42 @@
             const outputConsole = document.getElementById('outputConsole');
             const statusCodeSpan = document.getElementById('statusCode');
 
-            // URL exato fornecido no HTML
             const url = apiUrlElement.innerText.trim();
 
-            // --- 1. Lógica do Botão COPIAR ---
+            // 1. Copiar URL
             copyBtn.addEventListener('click', () => {
-                if (navigator.clipboard) {
+                if(navigator.clipboard) {
                     navigator.clipboard.writeText(url).then(() => {
-                        const originalText = copyBtn.innerText;
+                        const original = copyBtn.innerText;
                         copyBtn.innerText = "COPIADO!";
                         copyBtn.style.color = "var(--success)";
-                        
-                        setTimeout(() => {
-                            copyBtn.innerText = originalText;
+                        setTimeout(() => { 
+                            copyBtn.innerText = original; 
                             copyBtn.style.color = "var(--primary)";
                         }, 2000);
-                    }).catch(err => console.error('Falha ao copiar:', err));
+                    });
                 } else {
-                    // Fallback para browsers antigos (opcional, mas boa prática)
                     alert("Copie manualmente: " + url);
                 }
             });
 
-            // --- 2. Lógica do Botão TESTAR (Fetch API) ---
+            // 2. Testar API (Fetch)
             testBtn.addEventListener('click', async () => {
-                // Estado de Loading
+                // UI Loading
                 testBtn.disabled = true;
                 btnText.innerText = "A carregar...";
                 loadingSpinner.style.display = "block";
-                
-                // Limpar resultados anteriores
                 consoleArea.style.display = 'none';
                 outputConsole.innerText = "";
-                statusCodeSpan.innerText = "";
 
                 try {
-                    const startTime = performance.now();
-                    
-                    // Execução do pedido GET
+                    const start = performance.now();
                     const response = await fetch(url);
-                    
-                    const endTime = performance.now();
-                    const duration = (endTime - startTime).toFixed(0); // Tempo em ms
+                    const duration = (performance.now() - start).toFixed(0);
 
-                    // Tratamento do Status Code
-                    statusCodeSpan.innerText = `Status: ${response.status} ${response.statusText} (${duration}ms)`;
+                    statusCodeSpan.innerText = `Status: ${response.status} (${duration}ms)`;
                     
-                    if (response.ok) {
+                    if(response.ok) {
                         statusCodeSpan.style.color = "var(--success)";
                         outputConsole.style.color = "var(--success)";
                     } else {
@@ -343,32 +316,26 @@
                         outputConsole.style.color = "var(--error)";
                     }
 
-                    // Tentar converter para JSON
+                    // Tenta ler como JSON, fallback para Texto
                     try {
                         const data = await response.json();
-                        // Pretty Print do JSON (Indentação de 2 espaços)
                         outputConsole.innerText = JSON.stringify(data, null, 2);
-                    } catch (jsonError) {
-                        // Se não for JSON (ex: erro HTML do Netlify), mostra texto simples
-                        const textData = await response.text();
-                        outputConsole.innerText = textData || "Erro ao ler corpo da resposta.";
-                        console.warn("A resposta não é um JSON válido:", jsonError);
+                    } catch (e) {
+                        const text = await response.text();
+                        outputConsole.innerText = text || "Sem conteúdo.";
                     }
 
-                    // Mostrar a consola
                     consoleArea.style.display = 'block';
                     outputConsole.style.display = 'block';
 
                 } catch (error) {
-                    // Erro de Rede (ex: offline, DNS)
                     consoleArea.style.display = 'block';
                     outputConsole.style.display = 'block';
                     statusCodeSpan.innerText = "Erro de Rede";
                     statusCodeSpan.style.color = "var(--error)";
                     outputConsole.style.color = "var(--error)";
-                    outputConsole.innerText = `Falha na conexão:\n${error.message}\n\nVerifique se o webservice está ativo e se não há bloqueios de CORS.`;
+                    outputConsole.innerText = "Erro ao conectar:\n" + error.message;
                 } finally {
-                    // Restaurar botão
                     testBtn.disabled = false;
                     btnText.innerText = "Testar Endpoint Agora";
                     loadingSpinner.style.display = "none";
